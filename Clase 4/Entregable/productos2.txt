@@ -1,0 +1,1 @@
+[{"title":"Pantalón","price":30,"tumbnail":"dir-img","id":1},{"title":"Malla","price":30,"tumbnail":"dir-img","id":2},{"title":"Pantalón","price":30,"tumbnail":"dir-img","id":3},{"title":"Malla","price":30,"tumbnail":"dir-img","id":4},{"title":"Pantalón","price":30,"tumbnail":"dir-img","id":5},{"title":"Malla","price":30,"tumbnail":"dir-img","id":6}]
