@@ -9,9 +9,11 @@ class Contenedor {
     }
     
     init() {
+        let file = this.fileName
         try {
-			let data = fs.readFileSync(this.fileName);
+			let data = fs.readFileSync(file);
 			this.content = JSON.parse(data);
+            console.log(data)
 			for (const element of this.content) {
 				if (element.id > this.countID) this.countID = element.id;
 			}
@@ -21,13 +23,23 @@ class Contenedor {
     }
 
     async write() { 
-        await fs.promises.writeFile(this.fileName, JSON.stringify(this.content))
+        try {
+            const escribir = await fs.promises.writeFile(this.fileName, JSON.stringify(this.content))
+            console.log('success');
+        } catch (error) {
+			console.log('Error al escribir');
+		}
     }
 
     save(object) {
         this.countID++ 
-        object["id"] = this.countID 
-        this.content.push(object) 
+        const objAdd = {
+            title: object.title,
+            price: object.price,
+            tumbnail: object.tumbnail,
+            id: this.countID 
+        }
+        this.content.push(objAdd) 
         this.write() 
         return `El id del objeto añadido es ${this.countID}.` 
     }
@@ -57,14 +69,19 @@ class Contenedor {
             this.write() 
             result = `Producto fue eliminado`
         } else {
-            result = `Archivo vacío`
+            result = `Archivo vacío o el Producto no se encontró`
         }
         return result
     }
 
     deleteAll() { 
-        this.content = this.content.splice(0, this.content.length)
-        this.write()
+        this.content = []
+        try {
+            const escribir = fs.writeFile(this.fileName, JSON.stringify(this.content))
+            console.log('success');
+        } catch (error) {
+			console.log('Error al escribir');
+		}
     }
 }
 

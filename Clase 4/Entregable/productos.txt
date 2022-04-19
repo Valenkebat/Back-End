@@ -1,1 +1,1 @@
-[]"title":"nuevoArticulo","price":30,"tumbnail":"dir-img","id":1}]
+[{"title":"Articulo","price":30,"tumbnail":"dir-img","id":2}]":1},{"title":"Articulo","price":30,"tumbnail":"dir-img","id":2}]
