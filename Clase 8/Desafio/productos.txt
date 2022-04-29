@@ -1,0 +1,1 @@
+[{"title":"Pantalón Update","price":50,"tumbnail":"dir-img","id":1},{"title":"Pantalón 2","price":50,"tumbnail":"dir-img","id":2},{"title":"Pantalón 3","price":50,"tumbnail":"dir-img","id":3}]

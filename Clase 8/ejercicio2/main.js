@@ -1,11 +1,13 @@
 const express = require('express')
 const { Router } = express
 
+/* ------------------------ SERVER Config ------------------------------ */
+const PORT = 8080
 const app = express()
 app.use(express.static('public')) 
 app.use(express.urlencoded({extended:true}))
 
-/* ------------------------------------------------------ */
+
 /* Multer config */
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -20,9 +22,10 @@ const storage = multer.diskStorage({
 
 
 
-  // Levantar Server
 
-const PORT = 8080
+
+// Server
+
 const server = app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${server.address().port}`)
 })
