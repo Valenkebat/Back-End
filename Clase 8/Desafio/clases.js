@@ -13,7 +13,6 @@ class Contenedor {
         try {
 			let data = fs.readFileSync(file);
 			this.content = JSON.parse(data);
-            console.log(data)
 			for (const element of this.content) {
 				if (element.id > this.countID) this.countID = element.id;
 			}

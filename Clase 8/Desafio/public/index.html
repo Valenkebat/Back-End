@@ -7,6 +7,13 @@
     <title>Document</title>
 </head>
 <body>
+    <!--  SINGLE FILE -->
+    <h2>Ingrese Archivo</h2>
+    <form action="/api/subir" enctype="multipart/form-data" method="POST">
+        <input type="file" name="miArchivo" />
+        <input type="submit" value="Subir Archivo" />
+    </form>
+    <br>
     <h2>Ingrese Producto</h2>
     <form action="/api/productos" method="POST">
         Nombre: <input type="text" name="title">
