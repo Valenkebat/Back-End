@@ -59,6 +59,9 @@ class Contenedor {
     }
 
     getAll() {
+        if(this.content === []){
+            return 'SIN CONTENIDO'
+        }
         return this.content
     }
 

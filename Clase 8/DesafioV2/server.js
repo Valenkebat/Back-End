@@ -1,14 +1,17 @@
 const express = require('express')
+const multer = require('multer')
 const { Router } = express
 const Contenedor = require('./clases')
-const multer = require('multer')
 
-// Router Contenedor Config ------------------------------------
+const cont = ''
+// Router Contenedor Config -------------------------------------
 const routerContenedor = new Router()
 routerContenedor.use(express.json())
-//Lista de objetos Contenedor
-const objList = []
 
+const app = express()
+
+app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'))
 
 /* ------------------------------------------------------ */
 /* Multer config */
@@ -18,32 +21,31 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
       cb(null, `${Date.now()}-${file.originalname}`)
-    },
+    }
   })
- 
 const upload = multer({ storage: storage })
 
+// Endpoints
 
-routerContenedor.post('/subir', upload.single('miArchivo'),(req, res) => {
+routerContenedor.post('/subir', upload.single('miArchivo'), (req, res) => {
     const file = req.file
-    let filename = __dirname +'/'+ req.file.path;
     if (!file) {
         const error = new Error('Error: No se subio ningun archivo')
         error.httpStatuCode = 400
         return next(error)
     }
-    const c =  new Contenedor(filename)
-    objList.push(c)
+    let filename = __dirname +'/'+ req.file.path;
+    c = new Contenedor(filename)
     res.send('Archivo ' + file.originalname + ' se subio correctamente')
 })
 
 routerContenedor.get('/productos', (req, res) => {
-    res.json(objList[0].getAll())
+    res.json(c.getAll())
 })
 
 routerContenedor.get('/productos/:id', (req, res) => { 
     let id = Number(req.params.id)
-    let p = objList[0].getById(id) 
+    let p = c.getById(id) 
     if (p === null){
         return res.send({error: "producto no encontrado"})
     }
@@ -52,7 +54,7 @@ routerContenedor.get('/productos/:id', (req, res) => {
 
 routerContenedor.post('/productos', (req, res) => { 
     let product = req.body
-    return res.json(objList[0].save(product))
+    return res.json(c.save(product))
 })
 
 routerContenedor.put('/productos/:id', (req, res) => { 
@@ -67,12 +69,22 @@ routerContenedor.put('/productos/:id', (req, res) => {
 
 routerContenedor.delete('/productos/:id', (req, res) => { 
     let id = Number(req.params.id)
-    let p = objList[0].deleteById(id)
+    let p = c.deleteById(id)
     if (p === null){
         return res.send({error: "producto no encontrado"})
     }
     return res.json(p)
 })
 
-module.exports = routerContenedor
- 
+
+// Carga de Routers
+
+app.use('/api', routerContenedor)
+
+
+// SERVER
+const PORT = 8080
+const server = app.listen(PORT, () => {
+console.log(`Servidor escuchando en el puerto ${server.address().port}`)
+})
+server.on('error', error => console.log(`Error en servidor ${error}`))

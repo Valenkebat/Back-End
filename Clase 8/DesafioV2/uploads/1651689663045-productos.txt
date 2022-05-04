@@ -1,0 +1,1 @@
+[{"title":"Pantalón Update","price":50,"tumbnail":"dir-img","id":1},{"title":"Pantalón 2","price":50,"tumbnail":"dir-img","id":2},{"title":"Un Producto Distinto","price":"1900","tumbnail":"url-delaImagens","id":3},{"title":"Pantalón 4","price":1500,"tumbnail":"dir-img4","id":5}]
