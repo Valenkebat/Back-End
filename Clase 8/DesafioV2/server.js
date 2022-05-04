@@ -3,7 +3,7 @@ const multer = require('multer')
 const { Router } = express
 const Contenedor = require('./clases')
 
-const cont = ''
+let fileDir = __dirname
 // Router Contenedor Config -------------------------------------
 const routerContenedor = new Router()
 routerContenedor.use(express.json())
@@ -34,16 +34,17 @@ routerContenedor.post('/subir', upload.single('miArchivo'), (req, res) => {
         error.httpStatuCode = 400
         return next(error)
     }
-    let filename = __dirname +'/'+ req.file.path;
-    c = new Contenedor(filename)
+    fileDir = __dirname +'/'+ req.file.path;
     res.send('Archivo ' + file.originalname + ' se subio correctamente')
 })
 
 routerContenedor.get('/productos', (req, res) => {
+    let c = new Contenedor(fileDir)
     res.json(c.getAll())
 })
 
 routerContenedor.get('/productos/:id', (req, res) => { 
+    let c = new Contenedor(fileDir)
     let id = Number(req.params.id)
     let p = c.getById(id) 
     if (p === null){
@@ -53,21 +54,24 @@ routerContenedor.get('/productos/:id', (req, res) => {
 })
 
 routerContenedor.post('/productos', (req, res) => { 
+    let c = new Contenedor(fileDir)
     let product = req.body
     return res.json(c.save(product))
 })
 
 routerContenedor.put('/productos/:id', (req, res) => { 
+    let c = new Contenedor(fileDir)
     let id = Number(req.params.id)
     let product = req.body
-    let p = objList[0].updateById(id,product)
+    let p = c.updateById(id,product)
     if (p === null){
         return res.send({error: "producto no encontrado"})
     }
     return res.json(p)
 })
 
-routerContenedor.delete('/productos/:id', (req, res) => { 
+routerContenedor.delete('/productos/:id', (req, res) => {
+    let c = new Contenedor(fileDir) 
     let id = Number(req.params.id)
     let p = c.deleteById(id)
     if (p === null){
