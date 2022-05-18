@@ -34,16 +34,6 @@ app.get("/", (req, res) => {
   return res.render("layouts/main.hbs");
 });
 
-
-app.post("/productos", (req, res) => {
-    productos.save(req.body)
-});
-
-app.get("/productos", (req, res) => {
-  let response = productos.getAll()
-  return response;
-});
-
 /* sockets */
 io.on("connection", (socket) => {
   socket.emit("messages", messages.getAll());
