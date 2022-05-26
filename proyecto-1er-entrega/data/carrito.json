@@ -1,0 +1,23 @@
+[
+  {
+    "productos": [
+      { "title": "", "price": "", "thumbnail": "", "id": 5 },
+      { "title": "", "price": "", "thumbnail": "", "id": 5 },
+      { "title": "", "price": "", "thumbnail": "", "id": 5 },
+      {
+        "title": "Producto de la ostia",
+        "price": "12",
+        "thumbnail": "lalaa",
+        "id": 10
+      },
+      {
+        "title": "Producto de la ostia",
+        "price": "12",
+        "thumbnail": "lalaa",
+        "id": 10
+      }
+    ],
+    "id": 5
+  },
+  { "productos": [], "id": 6, "timestamp": 1653524111030 }
+]
