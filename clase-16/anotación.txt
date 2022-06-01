@@ -1,0 +1,72 @@
+const express = require("express");
+const handlebars = require('express-handlebars');
+
+require('./container/mysql').DBscript()
+require('./container/sqlite').DBscript()
+
+const { Server: HttpServer } = require("http");
+const { Server: IOServer } = require("socket.io");
+
+const PORT = 8080
+const app = express();
+const httpServer = new HttpServer(app);
+const io = new IOServer(httpServer);
+
+
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("./public"));
+
+
+app.use('api/', productosRouter)
+
+app.engine(
+    "hbs",
+    handlebars.engine({
+      extname: ".hbs",
+      defaultLayout: 'main.hbs',
+      partialsDir: __dirname + "/views/partials",
+    })
+  );
+app.set("views", "./views");
+app.set("views engine", "hbs");
+  
+app.get("/", (req, res) => {
+  return res.render("layouts/main.hbs");
+});
+
+
+const mensajesApi = new ContenedorSQL(config.sqlite3, 'mensajes')
+
+/* sockets */
+io.on("connection", (socket) => {
+  socket.emit("messages", messagesServerData);
+
+  socket.on("new-message", (data) => {
+    
+    await mensajesApi.guardar(mensaje)
+    
+    io.sockets.emit("messages", messagesServerData);
+  });
+});
+
+
+// SERVER
+httpServer.listen(PORT, () => {
+console.log(`Servidor escuchando en el puerto ${httpServer.address().port}`)
+})
+httpServer.on('error', error => console.log(`Error en servidor ${error}`))
+
+
+
+// contenedor.js
+
+
+ async guardar(elem) {
+        try {
+            return this.knex.insert(elem).into(this.tabla)
+        } catch (error) {
+            throw new Error(`Error al guardar: ${error}`)
+        }
+    }
