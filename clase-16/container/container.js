@@ -5,9 +5,11 @@ module.exports = class Contenedor {
     this.knex = knex(options)
     this.tableName = tableName
   }
+  
   save(elem) {
       try {
-          return this.knex.insert(elem).into(this.tabla)
+          console.log('Elemento Guardado: ',elem)
+          return this.knex(this.tableName).insert(elem)          
       } catch (error) {
           throw new Error(`Error al guardar: ${error}`)
       }
@@ -15,7 +17,7 @@ module.exports = class Contenedor {
 
   async getAll() {
     try {
-      return await knex.from(this.tableName).select("*");
+      return await this.knex(this.tableName).select("*");
     } catch (err) {
       return `Error: ${err}`;
     }
@@ -23,7 +25,7 @@ module.exports = class Contenedor {
 
   async deleteById(id) {
     try {
-      return await knex.from(this.tableName).where("id", id).del();
+      return await this.knex.from(this.tableName).where("id", id).del();
     } catch (err) {
       return `Error: ${err}`;
     }
@@ -31,7 +33,7 @@ module.exports = class Contenedor {
 
   async deleteAll() {
     try {
-      return await knex.from(this.tableName).del();
+      return await this.knex.from(this.tableName).del();
     } catch (err) {
       return `Error: ${err}`;
     }

@@ -1,0 +1,25 @@
+
+Inicializo base mongo en carpeta ya creada paso como parametro la dirección
+
+mongod --dbpath C:\ecommerce
+
+Comandos CLI 
+
+1- use MiBase
+
+2- show collections                                                 //Muestra las colecciones
+
+3- db.createCollection('nombreColeccion')                           //Crea una coleccion
+
+4- db.nombreColeccion.insertOne({nombre: "valen", edad: 30})                                        //Inserta un documento dentro de una coleccion
+
+5- db.nombreColeccion.insertMany([{nombre: "valen", edad: 30},{nombre: "juan", edad: 33}])          //Inserta documento dentro de una coleccion
+
+6- db.articulos.insertMany([{nmbre:'Pantalon', precio:20, stock: 10},
+{nmbre:'Calzon', precio:20, stock: 10},
+{nmbre:'Remera', precio:25, stock: 10}])                                    // Si ingreso una coleccion que no existe me la crea e inserta documentos
+
+7- db.articulos.find()                                                      // devuelve todos los Documentos de una coleccion
+
+8- db.articulos.estimatedDocumentCount()                        // Cuenta la cantidad de documentos
+   db.articulos.find().count()

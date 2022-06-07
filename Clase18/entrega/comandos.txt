@@ -1,0 +1,55 @@
+Comandos Entorno
+
+1- mongod --dbpath C:\BaseMongo                 //Inicio base mongo
+2- mongo                                        //Conecto cliente
+3- use ecommerce                                //Utilizo la base ecommerce
+
+Operaciones sobre la base
+
+1- 
+
+db.productos.insertMany([{title:'Pantalon', price:1500, thumbnail: 'imagen'},{title:'Camisa', price:1000, thumbnail: 'imagen'},{title:'Zapatos', price:2000, thumbnail: 'imagen'},{title:'Medias', price:500, thumbnail: 'imagen'},{title:'Remera', price:1200, thumbnail: 'imagen'},{title:'Té', price:800, thumbnail: 'imagen'},{title:'Canasto de Mimbre', price:1850, thumbnail: 'imagen'},{title:'Libro', price:2000, thumbnail: 'imagen'},{title:'Agenda', price:2520, thumbnail: 'imagen'},{title:'Campera', price:5000, thumbnail: 'imagen'}])
+
+db.mensajes.insertMany([{email:'juan@gmail.com', mensaje:'Hola como estas'},{email:'pedro@gmail.com', mensaje:'Hola como estas'},{email:'jorge@gmail.com', mensaje:'Hola como estas'},{email:'raul@gmail.com', mensaje:'bien y tu'},{email:'raul@gmail.com',mensaje:'no'},{email:'juan@gmail.com', mensaje:'...'},{email:'agustin@gmail.com',mensaje:'...'},{email:'pedro@gmail.com', mensaje:'....'},{email:'jorge@gmail.com', mensaje:'Holaa!!!!'},{email:'pedro@gmail.com', mensaje:'Hablennn'},])
+
+2-  db.productos.find()
+    db.mensajes.find()
+
+3- 
+    db.productos.find().count()
+    db.mensajes.find().count()
+
+///////
+(Me olvide de agregar campo stock en coleccion productos){
+    db.productos.updateMany({},{$set:{stock:50}})
+}
+///////
+
+4-
+    db.productos.insert({title:'Rompecabezas', price:1700, thumbnail: 'imagen', stock:50})
+
+// Productos con precio menor a 1000
+5- db.productos.find({price:{$lt:1000}})
+// Productos con precio entre los 1000 y 3000
+6- db.productos.find({price:{$gt:1000, $lt:3000}})
+// Productos con precio mayor a 3000
+7- db.productos.find({price:{$gt:3000}})
+
+//3er Producto mas barato 
+8- db.productos.find({},{title:1,_id:0}).skip(2).sort({price:1}).limit(1)
+
+9- db.productos.updateMany({},{$set:{stock:100}})
+
+// update stock a 0 productos con precio mayor a 4000
+10- db.productos.updateMany({price:{$gt:4000}},{$set:{stock:0}})
+
+// delete productos con precio menor a 1000
+11- db.productos.deleteMany({price:{$lt:1000}})
+
+
+// crear user 
+use admin
+
+db.createUser({user:'pepe', pwd:'asd456',roles:[{role:'read',db:'ecommerce'}]})
+
+mongo -u pepe -p asd456 ecommerce
