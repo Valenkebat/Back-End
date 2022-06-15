@@ -1,0 +1,19 @@
+Conecto a la base
+mongo mongodb+srv://coderhouse:coderhouse@cluster0.3veoi.mongodb.net/"Cluster0"
+
+async function ReadFromDB() {
+
+    try {
+        const URL = "mongodb+srv://coderhouse:coderhouse@cluster0.3veoi.mongodb.net/Cluster0"
+        
+        let conexion = await mongooose.connect(URL);
+        console.log("Conexion exitosa");
+
+        // Read usuarios
+        const usuarios = await models.usuarios.find();
+        console.log(usuarios);
+        return
+    } catch (error) {
+        console.log(error);
+    }
+}
