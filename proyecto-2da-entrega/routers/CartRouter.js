@@ -20,9 +20,14 @@ class CartRouter extends express.Router {
 
 
     this.post('/',(req, res) => {
-        res.send(this.CartFileDAO.new(), 
-        this.CartFirebaseDAO.new()), 
-        this.CartMongoDAO.new()
+        try{
+            this.CartFileDAO.new();
+            this.CartFirebaseDAO.new();
+            this.CartMongoDAO.new();
+            res.send("Cart created");
+        }catch{
+            res.send("Error creating cart");
+        }        
     });
 
 

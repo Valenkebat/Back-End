@@ -29,6 +29,16 @@ class ProductRouter extends express.Router {
                     this.ProductMongoDAO.update(req.params.id, req.body)
                     );
         })
+
+        this.delete('/:id', (req, res) => {
+            res.send(
+                this.ProductFileDAO.delete(req.params.id), 
+                this.ProductFirebaseDAO.delete(req.params.id), 
+                this.ProductMongoDAO.delete(req.params.id)
+                );}
+        )
     }
 
 }
+
+export default ProductRouter;
