@@ -4,7 +4,7 @@ class CartFirebaseContainer extends FirebaseContainer{
     constructor(){
         super('cart');
     }
-    async save(cart = { productos: [] }) {
+    async new(cart = { productos: [] }) {
         return super.save(cart)
     }
 }

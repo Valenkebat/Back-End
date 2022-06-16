@@ -15,7 +15,22 @@ class MongoContainer {
     return await this.model.find()
   }
 
+  async getById(id){
+    return await this.model.findById(id)
+  }
 
+  async save(obj){  
+    const newObj = new this.model(obj)
+    return await newObj.save()
+  }
+
+  async update(elem){
+    return await this.model.findByIdAndUpdate(elem._id, elem)
+  }
+
+  async delete(id){
+    return await this.model.findByIdAndDelete(id)
+  }
 
 }
 

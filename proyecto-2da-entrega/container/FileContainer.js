@@ -1,15 +1,16 @@
 import { promises as fs } from 'fs'
-import path from 'path'
 
 
+import path from 'path';
+const __dirname = path.resolve();
 class FileContainer {
    
     constructor(ruta) {
-        this.ruta = path.join(__dirname,(`/${ruta}`))
+        this.ruta = path.join(__dirname, ruta)
     }
 
     async getById(id) {
-        const objs = await this.listarAll()
+        const objs = await this.getAll()
         const buscado = objs.find(o => o.id == id)
         return buscado
     }
@@ -24,7 +25,7 @@ class FileContainer {
     }
 
     async save(obj) {
-        const objs = await this.listarAll()
+        const objs = await this.getAll()
 
         let newId
         if (objs.length == 0) {
@@ -45,7 +46,7 @@ class FileContainer {
     }
 
     async update(elem) {
-        const objs = await this.listarAll()
+        const objs = await this.getAll()
         const index = objs.findIndex(o => o.id == elem.id)
         if (index == -1) {
             throw new Error(`Error al actualizar: no se encontró el id ${id}`)
@@ -60,7 +61,7 @@ class FileContainer {
     }
 
     async delete(id) {
-        const objs = await this.listarAll()
+        const objs = await this.getAll()
         const index = objs.findIndex(o => o.id == id)
         if (index == -1) {
             throw new Error(`Error al borrar: no se encontró el id ${id}`)

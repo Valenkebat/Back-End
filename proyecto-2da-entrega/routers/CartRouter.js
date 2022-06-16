@@ -11,26 +11,64 @@ import ProductMongoDAO from '../dao/product/ProductMongoDAO.js';
 class CartRouter extends express.Router {
   constructor() {
     super();
+    this.CartFileDAO = new CartFileDAO();
+    this.CartFirebaseDAO = new CartFirebaseDAO();
+    this.CartMongoDAO = new CartMongoDAO();
+    this.ProductFileDAO = new ProductFileDAO();
+    this.ProductFirebaseDAO = new ProductFirebaseDAO();
+    this.ProductMongoDAO = new ProductMongoDAO();
+
 
     this.post('/',(req, res) => {
-        let a = new CartFileDAO();
-        let b = new CartFirebaseDAO();
-        let c = new CartMongoDAO();
-        res.send({a,b,c});
-    })
+        res.send(this.CartFileDAO.new(), 
+        this.CartFirebaseDAO.new()), 
+        this.CartMongoDAO.new()
+    });
+
 
     this.get('/',(req, res) => {
-        res.send(CartFileDAO.getAll(),CartFirebaseDAO.getAll(),CartMongoDAO.getAll());})
+        res.send(
+            this.CartFileDAO.getAll(),
+            this.CartFirebaseDAO.getAll(),
+            this.CartMongoDAO.getAll(),
+        );})
     
     
 
     this.get('/:id',(req, res) => {
-        res.send(CartFileDAO.getById(req.params.id),CartFirebaseDAO.getById(req.params.id),CartMongoDAO.getById(req.params.id));
-    
+        res.send(
+            this.CartFileDAO.getById(req.params.id),
+            this.CartFirebaseDAO.getById(req.params.id),
+            this.CartMongoDAO.getById(req.params.id),
+            ); 
         })
 
-    }
+    
 
-}
+    this.post('/:id/product/:id',(req, res) => {
+        let productA = this.ProductFileDAO.getById(req.params.id);
+        let productB = this.ProductFirebaseDAO.getById(req.params.id);
+        let productC = this.ProductMongoDAO.getById(req.params.id);
+        res.sed(
+            this.CartFileDAO.addProduct(req.params.id, productA),
+            this.CartFirebaseDAO.addProduct(req.params.id, productB),
+            this.CartMongoDAO.addProduct(req.params.id, productC),
+        );
+        }
+    )
+
+    this.delete('/:id/product/:id',(req, res) => {
+        let productA = this.ProductFileDAO.getById(req.params.id);
+        let productB = this.ProductFirebaseDAO.getById(req.params.id);
+        let productC = this.ProductMongoDAO.getById(req.params.id);
+        res.sed(
+            this.CartFileDAO.removeProduct(req.params.id, productA),
+            this.CartFirebaseDAO.removeProduct(req.params.id, productB),
+            this.CartMongoDAO.removeProduct(req.params.id, productC),
+        );
+        })
+
+
+}}
 
 export default CartRouter;
