@@ -1,0 +1,16 @@
+{{! Register FORM }}
+<br>
+<div class="container bg-light p-3 rounded">
+  <h2 class="text-primary">Registro de usuario</h2>
+  <form action="/register" method="post">
+    <div class="mb-3">
+      <label for="title" class="form-label">Ingrese su nombre</label>
+      <input type="text" class="form-control" name="username" />
+      <label for="title" class="form-label">Ingrese password</label>
+      <input type="password" class="form-control" name="password" />
+    </div>
+    <button type="submit" class="btn btn-success">Enviar</button>
+    <button class="btn btn-warning my-5" onclick="location.href='/login'">Login</button>
+  </form>
+  <br />
+</div>
