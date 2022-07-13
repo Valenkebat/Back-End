@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Valenkebat/Back-End/issues"
   },
-  "homepage": "https://github.com/Valenkebat/Back-End#readme"
+  "homepage": "https://github.com/Valenkebat/Back-End#readme",
+  "dependencies": {
+    "minimist": "^1.2.6"
+  }
 }
