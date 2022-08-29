@@ -8,10 +8,10 @@ class RouterNews {
     }
 
     start() {
-        router.get('/:id', this.newsController.getNews())
-        router.post('/', this.newsController.saveNews())
-        router.put('/:id', this.newsController.updateNews())
-        router.delete('/:id', this.newsController.deleteNews())
+        router.get('/:id', this.newsController.getNews)
+        router.post('/', this.newsController.saveNews)
+        router.put('/:id', this.newsController.updateNews)
+        router.delete('/:id', this.newsController.deleteNews)
 
         return router
     }
