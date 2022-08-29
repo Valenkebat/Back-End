@@ -1,0 +1,27 @@
+{
+  "name": "d15",
+  "version": "1.0.0",
+  "description": "Desafio 15 - Mejorar la arquitectura de nuestra API",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js --ignore news.json",
+    "dev": "set NODE_ENV=development && node server.js",
+    "prod": "set NODE_ENV=production && node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "joi": "^17.6.0",
+    "mongodb": "^4.5.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.4.0"
+  }
+}
